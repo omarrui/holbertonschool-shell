@@ -1,2 +1,2 @@
 #!/bin/bash
-paste - - < /dev/stdin
+paste -d '\n' - - <&0
