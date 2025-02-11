@@ -1,2 +1,2 @@
 #!/bin/bash
-paste -d '\n' - - <&0
+tr 'A-Za-z' 'N-ZA-Mn-za-m'
