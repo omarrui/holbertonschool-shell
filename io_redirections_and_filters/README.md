@@ -107,7 +107,7 @@ This script creates a file named `\*\'Best School\'\*$?\*\*\*\*\*:)", containing
 
 ```bash
 #!/bin/bash
-echo "Best School" > "*\'Best School\'\*$?\*\*\*\*\*:"
+echo -e "Best School"  >> "\\*\\\\'\"Best School\"\\'\\\\*$\\?\\*\\*\\*\\*\\*:)"
 ```
 
 ### 8. Save current state of directory
