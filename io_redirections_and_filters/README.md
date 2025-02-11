@@ -131,13 +131,13 @@ tail -1 iacta >> iacta
 ```
 
 ### 10. No more javascript
-**File:** `10-no_more_js`
+**File:** find . -name "*.js" -type f -delete
 
 This script deletes all `.js` files in the current directory.
 
 ```bash
 #!/bin/bash
-rm -f *.js
+find . -name "*.js" -type f -delete
 ```
 
 ### 11. Don't just count your directories, make your directories count
@@ -147,7 +147,7 @@ This script counts the number of directories (excluding files) in the current di
 
 ```bash
 #!/bin/bash
-find . -type d | wc -l
+find . -mindepth 1 -type d | wc -l
 ```
 
 ### 12. What’s new
@@ -157,7 +157,7 @@ This script displays the 10 newest files in the current directory.
 
 ```bash
 #!/bin/bash
-ls -lt | head -10
+ls -lt | head 
 ```
 
 ### 13. Being unique is better than being perfect
@@ -167,7 +167,7 @@ This script finds and removes duplicate lines in a file.
 
 ```bash
 #!/bin/bash
-sort file | uniq
+sort file | uniq -u
 ```
 
 ### 14. It must be in that file
@@ -177,7 +177,7 @@ This script finds lines containing "root" in `/etc/passwd`.
 
 ```bash
 #!/bin/bash
-grep "root" /etc/passwd
+grep root /etc/passwd
 ```
 
 ### 15. Count that word
@@ -187,7 +187,7 @@ This script counts occurrences of "bin" in `/etc/passwd`.
 
 ```bash
 #!/bin/bash
-grep -c "bin" /etc/passwd
+grep -c bin /etc/passwd
 ```
 
 ### 16. What's next?
@@ -197,7 +197,7 @@ This script finds lines containing "root" in `/etc/passwd`, ignoring case.
 
 ```bash
 #!/bin/bash
-grep -i "root" /etc/passwd
+grep -A 3 root /etc/passwd
 ```
 
 ### 17. I hate bins
@@ -218,6 +218,8 @@ This script displays only lines that contain letters (ignoring digits).
 ```bash
 #!/bin/bash
 grep "[a-zA-Z]" /etc/passwd
+#!/bin/bash
+grep '^[[:alpha:]]' /etc/ssh/sshd_config
 ```
 
 ### 19. A to Z
@@ -228,6 +230,8 @@ This script replaces all occurrences of `A` and `Z` in a file.
 ```bash
 #!/bin/bash
 tr 'A' 'Z' < file
+#!/bin/bash
+cat 2>&1 | tr Ac Ze
 ```
 
 ### 20. Without C, you would live in hiago
@@ -237,7 +241,7 @@ This script removes all occurrences of the letter `c` from input.
 
 ```bash
 #!/bin/bash
-tr -d 'c'
+cat 2>&1 | tr -d Cc
 ```
 
 ### 21. esreveR
@@ -247,7 +251,7 @@ This script reverses the content of a file.
 
 ```bash
 #!/bin/bash
-tac file
+cat 2>&1 | rev
 ```
 
 ### 22. DJ Cut Killer
@@ -257,7 +261,7 @@ This script sorts words in a file and displays them.
 
 ```bash
 #!/bin/bash
-sort file
+cut -d: -f1,6 /etc/passwd | sort -t: -k1
 ```
 
 ## Usage
