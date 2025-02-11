@@ -1,6 +1,6 @@
 # Holberton School - I/O Redirections and Filters
 
-This repository contains a series of shell scripts demonstrating input/output redirections and filters in Linux.
+This repository contains a series of shell scripts demonstrating various I/O redirections and filters.
 
 ## Table of Contents
 
@@ -28,12 +28,13 @@ This repository contains a series of shell scripts demonstrating input/output re
 21. esreveR  
 22. DJ Cut Killer  
 
----
+## Script Descriptions
 
 ### 0. Hello World
 **File:** `0-hello_world`
 
 This script prints "Hello, World" to standard output.
+
 ```bash
 #!/bin/bash
 echo "Hello, World"
@@ -43,6 +44,7 @@ echo "Hello, World"
 **File:** `1-confused_smiley`
 
 This script displays a confused smiley `"(Ôo)"`.
+
 ```bash
 #!/bin/bash
 echo "(Ôo)"
@@ -51,7 +53,8 @@ echo "(Ôo)"
 ### 2. Let's display a file
 **File:** `2-hellofile`
 
-This script displays the content of `/etc/passwd`.
+This script displays the contents of `/etc/passwd`.
+
 ```bash
 #!/bin/bash
 cat /etc/passwd
@@ -60,7 +63,8 @@ cat /etc/passwd
 ### 3. What about 2?
 **File:** `3-twofiles`
 
-This script displays the content of `/etc/passwd` and `/etc/hosts`.
+This script displays the contents of `/etc/passwd` and `/etc/hosts`.
+
 ```bash
 #!/bin/bash
 cat /etc/passwd /etc/hosts
@@ -70,6 +74,7 @@ cat /etc/passwd /etc/hosts
 **File:** `4-lastlines`
 
 This script displays the last 10 lines of `/etc/passwd`.
+
 ```bash
 #!/bin/bash
 tail /etc/passwd
@@ -79,6 +84,7 @@ tail /etc/passwd
 **File:** `5-firstlines`
 
 This script displays the first 10 lines of `/etc/passwd`.
+
 ```bash
 #!/bin/bash
 head /etc/passwd
@@ -87,25 +93,28 @@ head /etc/passwd
 ### 6. Line #2
 **File:** `6-third_line`
 
-This script displays the third line of a file named `iacta`.
+This script displays the third line of the file `iacta`.
+
 ```bash
 #!/bin/bash
-sed -n '3p' iacta
+head -3 iacta | tail -1
 ```
 
 ### 7. It is a good file that cuts iron without making a noise
 **File:** `7-file`
 
-This script creates a file named `\*\'"Best School"\'\*\$\?\*\*\*\*\*\*:)\` containing "Best School".
+This script creates a file named `\*\'Best School\'\*$?\*\*\*\*\*:)", containing the text `Best School`.
+
 ```bash
 #!/bin/bash
-echo "Best School" > '\*\'"Best School"\'\*\$\?\*\*\*\*\*\*:)
+echo "Best School" > "*\'Best School\'\*$?\*\*\*\*\*:"
 ```
 
 ### 8. Save current state of directory
 **File:** `8-cwd_state`
 
-This script writes the output of `ls -la` into `ls_cwd_content`.
+This script writes the result of `ls -la` into the file `ls_cwd_content`.
+
 ```bash
 #!/bin/bash
 ls -la > ls_cwd_content
@@ -114,16 +123,18 @@ ls -la > ls_cwd_content
 ### 9. Duplicate last line
 **File:** `9-duplicate_last_line`
 
-This script duplicates the last line of `iacta`.
+This script duplicates the last line of a file.
+
 ```bash
 #!/bin/bash
-tail -n 1 iacta >> iacta
+tail -1 iacta >> iacta
 ```
 
 ### 10. No more javascript
 **File:** `10-no_more_js`
 
-This script deletes all JavaScript files (`.js`) in the current directory.
+This script deletes all `.js` files in the current directory.
+
 ```bash
 #!/bin/bash
 rm -f *.js
@@ -132,16 +143,18 @@ rm -f *.js
 ### 11. Don't just count your directories, make your directories count
 **File:** `11-directories`
 
-This script counts the number of directories in the current directory.
+This script counts the number of directories (excluding files) in the current directory.
+
 ```bash
 #!/bin/bash
-ls -l | grep "^d" | wc -l
+find . -type d | wc -l
 ```
 
 ### 12. What’s new
 **File:** `12-newest_files`
 
-This script lists the 10 newest files in the current directory.
+This script displays the 10 newest files in the current directory.
+
 ```bash
 #!/bin/bash
 ls -lt | head -10
@@ -150,106 +163,113 @@ ls -lt | head -10
 ### 13. Being unique is better than being perfect
 **File:** `13-unique`
 
-This script takes a list of words as input and prints only unique words.
+This script finds and removes duplicate lines in a file.
+
 ```bash
 #!/bin/bash
-sort | uniq
+sort file | uniq
 ```
 
 ### 14. It must be in that file
 **File:** `14-findthatword`
 
-This script finds lines containing the word "Holberton" in the file `test.txt`.
+This script finds lines containing "root" in `/etc/passwd`.
+
 ```bash
 #!/bin/bash
-grep "Holberton" test.txt
+grep "root" /etc/passwd
 ```
 
 ### 15. Count that word
 **File:** `15-countthatword`
 
-This script counts occurrences of "Holberton" in `test.txt`.
+This script counts occurrences of "bin" in `/etc/passwd`.
+
 ```bash
 #!/bin/bash
-grep -c "Holberton" test.txt
+grep -c "bin" /etc/passwd
 ```
 
 ### 16. What's next?
 **File:** `16-whatsnext`
 
-This script displays lines containing "root" and 3 lines after them in `/etc/passwd`.
+This script finds lines containing "root" in `/etc/passwd`, ignoring case.
+
 ```bash
 #!/bin/bash
-grep -A 3 "root" /etc/passwd
+grep -i "root" /etc/passwd
 ```
 
 ### 17. I hate bins
-**File:** `17-hidethisword`
+**File:** `17-hatebins`
 
-This script displays all lines except those containing "bin".
+This script displays all lines in `/etc/passwd` that do **not** contain "bin".
+
 ```bash
 #!/bin/bash
 grep -v "bin" /etc/passwd
 ```
 
 ### 18. Letters only please
-**File:** `18-letteronly`
+**File:** `18-lettersonly`
 
-This script displays all lines that contain only letters.
+This script displays only lines that contain letters (ignoring digits).
+
 ```bash
 #!/bin/bash
-grep "^[a-zA-Z]*$" /etc/passwd
+grep "[a-zA-Z]" /etc/passwd
 ```
 
 ### 19. A to Z
-**File:** `19-AZ`
+**File:** `19-AtoZ`
 
-This script replaces all occurrences of `A` and `c` with `Z` and `e`.
+This script replaces all occurrences of `A` and `Z` in a file.
+
 ```bash
 #!/bin/bash
-tr 'Ac' 'Ze'
+tr 'A' 'Z' < file
 ```
 
 ### 20. Without C, you would live in hiago
-**File:** `20-hiago`
+**File:** `20-withoutc`
 
-This script removes all occurrences of `c` and `C`.
+This script removes all occurrences of the letter `c` from input.
+
 ```bash
 #!/bin/bash
-tr -d 'cC'
+tr -d 'c'
 ```
 
 ### 21. esreveR
 **File:** `21-reverse`
 
-This script reverses the input text.
+This script reverses the content of a file.
+
 ```bash
 #!/bin/bash
-rev
+tac file
 ```
 
 ### 22. DJ Cut Killer
-**File:** `22-djc`
+**File:** `22-djcutkiller`
 
-This script sorts words and displays only those appearing exactly once.
+This script sorts words in a file and displays them.
+
 ```bash
 #!/bin/bash
-sort | uniq -u
+sort file
 ```
 
 ## Usage
+Ensure the scripts have execution permissions:
 
-Make sure the scripts have execute permissions:
 ```bash
 chmod +x script_name
 ```
+
 Run the scripts using:
+
 ```bash
 ./script_name
 ```
-
----
-
-This repository is part of the Holberton School curriculum.
-
 
