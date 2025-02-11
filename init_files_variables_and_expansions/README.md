@@ -1,223 +1,233 @@
-Shell, init files, variables and expansions
-Amateur
-By: Julien Barbier
+# Shell Scripting: Variables, Expansions, and Initialization Files
 
-Description
-This project consists of a series of shell scripts that demonstrate basic shell commands, handling of shell initialization files, variables, expansions, and arithmetic. Each script is exactly two lines long (the first line is always exactly #!/bin/bash), ends with a new line, and adheres to strict constraints.
+## Learning Objectives
+By the end of this project, you should be able to explain:
+- What happens when you type `$ ls -l *.txt`
+- Shell Initialization Files and their roles
+- The difference between local and global variables
+- Reserved variables and their roles (e.g., HOME, PATH, PS1)
+- Special parameters and `$?`
+- Expansions and their usage
+- Differences between single and double quotes
+- Command substitution using `$()` and backticks
+- Performing arithmetic operations in shell
+- Creating and managing aliases
+- Executing commands from a file in the current shell
 
-Requirements
-Allowed editors: vi, vim, emacs
-Tested on: Ubuntu 20.04 LTS
-Script constraints:
-Each script must be exactly two lines long (use wc -l filename to verify it prints 2).
-Each file must end with a new line.
-The first line must be exactly:
-sh
-Copy
-Edit
-#!/bin/bash
-Forbidden: You are not allowed to use &&, || or ;, nor may you use bc, sed or awk.
-All files must be executable.
-Resources
-Read or watch:
-Expansions
-Shell Arithmetic
-Variables
-Shell initialization files
-The alias Command
-Technical Writing
-Man pages or help for: printenv, set, unset, export, alias, unalias, ., source, printf
-Learning Objectives
-At the end of this project you should be able to explain to anyone (without help from Google):
+---
 
-What happens when you type ls -l *.txt
-The roles of /etc/profile, /etc/profile.d, and ~/.bashrc
-The difference between local and global variables, and what reserved variables are
-How to create, update, and delete shell variables
-The roles of reserved variables like HOME, PATH, and PS1
-What special parameters are (e.g., $?)
-How expansions work and the difference between single and double quotes
-How command substitution works using $() and backticks
-How to perform arithmetic operations in the shell
-How to create and manage aliases
-How to execute commands from a file in the current shell
-Tasks
-0. <o>
-Task: Create a script that creates an alias.
+## Shell Initialization Files
+- `/etc/profile`: System-wide environment configurations
+- `/etc/profile.d/`: Directory containing scripts sourced by `/etc/profile`
+- `~/.bashrc`: User-specific shell initialization file
 
-Alias Name: ls
-Alias Value: rm *
-Usage: After sourcing this script, running ls will effectively call rm * (so use the escaped \ls to bypass it).
-sh
-Copy
-Edit
+---
+
+## Variables
+### Local vs. Global Variables
+- **Local Variables**: Available only in the current shell session
+- **Global Variables**: Exported and available to child processes
+
+### Reserved Variables
+- `HOME`: User’s home directory
+- `PATH`: Directories where the shell searches for commands
+- `PS1`: Primary prompt string
+
+### Special Parameters
+- `$?`: Exit status of the last executed command
+
+---
+
+## Expansions
+- **Tilde Expansion** (`~` for home directory)
+- **Brace Expansion** (`{a,b,c}` expands to `a b c`)
+- **Parameter Expansion** (`${VAR}`)
+- **Command Substitution**
+  - Using `$()` (preferred) or backticks `` ` ` ``
+- **Arithmetic Expansion** (`$((expression))`)
+
+### Quotes
+- **Single Quotes (`'`)**: Literal interpretation
+- **Double Quotes (`"`)**: Allows variable expansion
+
+---
+
+## Shell Arithmetic
+Perform calculations using:
+```bash
+$((expression))
+```
+Example:
+```bash
+echo $((5 + 3)) # Outputs 8
+```
+
+---
+
+## The Alias Command
+### Creating an Alias
+```bash
+alias ls='rm *'
+```
+### Listing Aliases
+```bash
+alias
+```
+### Temporarily Disabling an Alias
+```bash
+\ls
+```
+
+---
+
+## Executing Commands from a File
+- `source filename`
+- `.` (dot) `filename`
+
+---
+
+## Task Breakdown
+### 0. Alias
+Create a script that creates an alias `ls` that removes all files:
+```bash
 #!/bin/bash
 alias ls='rm *'
-1. Hello you
-Task: Create a script that prints hello user, where user is the current Linux user.
+```
 
-sh
-Copy
-Edit
+### 1. Print Username
+```bash
 #!/bin/bash
 echo "hello $USER"
-2. The path to success is to take massive, determined action
-Task: Add /action to the PATH so that it’s the last directory searched.
+```
 
-sh
-Copy
-Edit
+### 2. Modify PATH
+```bash
 #!/bin/bash
 export PATH="$PATH:/action"
-3. If the path be beautiful, let us not ask where it leads
-Task: Create a script that counts the number of directories in the PATH.
+```
 
-sh
-Copy
-Edit
+### 3. Count Directories in PATH
+```bash
 #!/bin/bash
 echo "$PATH" | tr ':' '\n' | wc -l
-4. Global variables
-Task: Create a script that lists all environment variables.
+```
 
-sh
-Copy
-Edit
+### 4. List Global Variables
+```bash
 #!/bin/bash
 printenv
-5. Local variables
-Task: Create a script that lists all local variables, environment variables, and functions.
+```
 
-sh
-Copy
-Edit
+### 5. List Local and Global Variables
+```bash
 #!/bin/bash
 set
-6. Local variable
-Task: Create a script that creates a new local variable.
+```
 
-Variable Name: BEST
-Value: School
-sh
-Copy
-Edit
+### 6. Create Local Variable
+```bash
 #!/bin/bash
 BEST="School"
-7. Global variable
-Task: Create a script that creates a new global variable.
+```
 
-Variable Name: BEST
-Value: School
-sh
-Copy
-Edit
+### 7. Create Global Variable
+```bash
 #!/bin/bash
 export BEST="School"
-8. Every addition to true knowledge is an addition to human power
-Task: Create a script that prints the result of adding 128 to the value stored in the environment variable TRUEKNOWLEDGE.
+```
 
-sh
-Copy
-Edit
+### 8. Addition
+```bash
 #!/bin/bash
 echo $((128 + TRUEKNOWLEDGE))
-9. Divide and rule
-Task: Create a script that prints the result of dividing the environment variable POWER by DIVIDE.
+```
 
-sh
-Copy
-Edit
+### 9. Division
+```bash
 #!/bin/bash
 echo $((POWER / DIVIDE))
-10. Love is anterior to life, posterior to death, initial of creation, and the exponent of breath
-Task: Create a script that displays the result of raising BREATH to the power of LOVE.
+```
 
-sh
-Copy
-Edit
+### 10. Exponentiation
+```bash
 #!/bin/bash
 echo $((BREATH ** LOVE))
-11. There are 10 types of people in the world -- Those who understand binary, and those who don't
-Task: Create a script that converts a binary number (stored in the environment variable BINARY) to decimal.
+```
 
-sh
-Copy
-Edit
+### 11. Base 2 to Base 10 Conversion
+- Converts a binary number stored in `$BINARY` to decimal.
+```sh
 #!/bin/bash
 echo $((2#$BINARY))
-12. Combination
-Task: Create a script that prints all possible combinations of two letters (lowercase, from a to z), except for oo.
+```
 
-Details:
-One combination per line
-Output should be alphabetically ordered, starting with aa
-Do not print oo
-The script must contain a maximum of 64 characters
-sh
-Copy
-Edit
-#!/bin/bash
+### 12. Print Two-Letter Combinations
+- Prints all lowercase letter combinations, except `oo`, using max 64 characters.
+```sh
 echo {a..z}{a..z} | tr ' ' '\n' | grep -v '^oo$'
-13. Floats
-Task: Create a script that prints the value of NUM with two decimal places.
+```
 
-sh
-Copy
-Edit
+### 13. Print Floating Point Number
+- Prints `$NUM` with two decimal places.
+```sh
 #!/bin/bash
 printf "%.2f\n" "$NUM"
-14. Decimal to Hexadecimal
-Task: Create a script that converts a decimal number (stored in the environment variable DECIMAL) to hexadecimal.
+```
 
-sh
-Copy
-Edit
+### 14. Decimal to Hexadecimal
+- Converts a decimal number in `$DECIMAL` to hexadecimal.
+```sh
 #!/bin/bash
-printf "%x\n" "$DECIMAL"
-15. What happens when you type ls *.c
-Advanced Task:
-Write a blog post describing, step by step, what happens when you type ls *.c and hit Enter. Explain every step (e.g., globbing, expansion, command execution) so that even a beginner understands.
+echo "obase=16; $DECIMAL" | bc
+```
 
-Requirements:
-Include at least one picture at the top of your blog post
-Publish your post on Medium or LinkedIn
-Share the URL(s) below
-URL:
-LinkedIn Blog Post
-16. Everyone is a proponent of strong encryption
-Task: Create a script that encodes and decodes text using ROT13 encryption (assume ASCII).
+### 15. Blog Post: `ls *.c`
+- Explains step-by-step execution of `ls *.c` in a shell.
+- **URL**: [LinkedIn Blog Post](https://www.linkedin.com/posts/rouigui-omar-96514631b_while-learning-about-shell-it-came-across-activity-7295207587438817280-9Y41)
 
-sh
-Copy
-Edit
+### 16. ROT13 Encryption/Decryption
+- Encodes and decodes text using ROT13 cipher.
+```sh
 #!/bin/bash
 tr 'A-Za-z' 'N-ZA-Mn-za-m'
-17. The eggs of the brood need to be an odd number
-Task: Create a script that prints every other line from the input (i.e., odd-numbered lines), starting with the first line.
+```
 
-Compliant Solution: Uses paste and cut (avoiding forbidden commands).
-sh
-Copy
-Edit
+### 17. Print Every Other Line
+- Prints every alternate line from input, starting with the first.
+```sh
 #!/bin/bash
 paste - - | cut -f1
-18. I'm an instant star. Just add water and stir.
-Task: Create a script that adds the two numbers stored in the environment variables WATER and STIR and prints the result.
+```
 
-Details:
-WATER is in base water
-STIR is in base stir
-The result should be printed in base bestchol
-Example:
-sh
-Copy
-Edit
-export WATER="ewwatratewa"
-export STIR="ti.itirtrtr"
-./17-water_and_stir  # Expected output: shtbeolhc
-sh
-Copy
-Edit
+### 18. Add Two Numbers in Custom Bases
+- Adds `$WATER` (base `water`) and `$STIR` (base `stir`), outputting in `bestchol`.
+```sh
 #!/bin/bash
-echo "$(echo $(( $(echo "$WATER" | tr 'water' '01234') + $(echo "$STIR" | tr 'stir.' '01234') )) | tr '0123456789' 'shtbeolhc')"
+
+# Define bases
+WATER_BASE=wtare
+STIR_BASE=tir
+BESTCHOL_BASE=bestchol
+
+# Convert input to decimal
+W_DEC=$(echo "$WATER" | tr "$WATER_BASE" "012345")
+S_DEC=$(echo "$STIR" | tr "$STIR_BASE" "012345")
+
+# Compute sum and convert to output base
+SUM_DEC=$((W_DEC + S_DEC))
+echo "$SUM_DEC" | tr "0123456789" "$BESTCHOL_BASE"
+```
+
+---
+This document summarizes key concepts and exercises related to shell scripting.
+
+
+---
+
+## Requirements
+- Scripts must be exactly **two lines** long
+- Files must be executable
+- First line: `#!/bin/bash`
+- README.md explaining each script
+
 
