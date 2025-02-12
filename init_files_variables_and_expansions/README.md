@@ -203,19 +203,7 @@ paste - - | cut -f1
 - Adds `$WATER` (base `water`) and `$STIR` (base `stir`), outputting in `bestchol`.
 ```sh
 #!/bin/bash
-
-# Define bases
-WATER_BASE=wtare
-STIR_BASE=tir
-BESTCHOL_BASE=bestchol
-
-# Convert input to decimal
-W_DEC=$(echo "$WATER" | tr "$WATER_BASE" "012345")
-S_DEC=$(echo "$STIR" | tr "$STIR_BASE" "012345")
-
-# Compute sum and convert to output base
-SUM_DEC=$((W_DEC + S_DEC))
-echo "$SUM_DEC" | tr "0123456789" "$BESTCHOL_BASE"
+echo $(printf "%o" $((5#$(echo $WATER | tr 'water' '01234') + 5#$(echo $STIR | tr 'stir.' '01234')))) | tr '01234567' 'bestchol'
 ```
 
 ---
