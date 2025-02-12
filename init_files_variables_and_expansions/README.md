@@ -178,12 +178,11 @@ printf "%.2f\n" "$NUM"
 - Converts a decimal number in `$DECIMAL` to hexadecimal.
 ```sh
 #!/bin/bash
-echo "obase=16; $DECIMAL" | bc
-```
+printf "%x\n" "$DECIMAL"```
 
 ### 15. Blog Post: `ls *.c`
 - Explains step-by-step execution of `ls *.c` in a shell.
-- **URL**: [LinkedIn Blog Post](https://www.linkedin.com/posts/rouigui-omar-96514631b_while-learning-about-shell-it-came-across-activity-7295207587438817280-9Y41)
+- **URL**: [LinkedIn Blog Post](https://www.linkedin.com/posts/rouigui-omar-96514631b_ls-c-activity-7295364223386148864-MW4X?utm_source=share&utm_medium=member_desktop)
 
 ### 16. ROT13 Encryption/Decryption
 - Encodes and decodes text using ROT13 cipher.
